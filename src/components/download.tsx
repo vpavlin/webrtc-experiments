@@ -55,7 +55,7 @@ const DownloadWebTorrent = ({magnetUri}: IWebTorrentProps) => {
     const [blobUrl, setBlobUrl] = useState<string>()
     const [blobType, setBlobType] = useState<string>()
     const [elem, setElem] = useState(<div></div>)
-    const {download} = useWebTorrent()
+    const {download, torrent} = useWebTorrent()
     const [downlaoding, setDownloading] = useState(false)
 
 
@@ -94,7 +94,10 @@ const DownloadWebTorrent = ({magnetUri}: IWebTorrentProps) => {
     return (<div>
         {
             downlaoding ? 
-                <div>Downloading...</div>
+                <div>{torrent && <div>
+                    <progress className="progress w-120" value={torrent.downloaded} max={torrent.length}></progress>
+                    <div>{torrent.progress * 100}%</div>
+                </div>}</div>
                 :
                 <div className="my-4">{elem}</div>               
         }
