@@ -44,7 +44,7 @@ const Upload = ({tech}: IProps) => {
                 {loading && <span className="loading loading-spinner loading-lg"></span>}
             </div>
             {tech == Tech.Helia && <UploadHelia files={plainFiles} setCID={setLink}/>}
-            <div>{<div>{link}</div>}</div>
+            <div>{<div className="break-all">{link}</div>}</div>
         </div>
     )
 }
