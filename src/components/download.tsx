@@ -95,8 +95,8 @@ const DownloadWebTorrent = ({magnetUri}: IWebTorrentProps) => {
         {
             downlaoding ? 
                 <div>{torrent && <div>
-                    <progress className="progress w-120" value={torrent.downloaded} max={torrent.length}></progress>
-                    <div>{torrent.progress * 100}%</div>
+                    <progress className="progress w-120" value={torrent.progress} max={100}></progress>
+                    <div>{torrent.progress}%</div>
                 </div>}</div>
                 :
                 <div className="my-4">{elem}</div>               

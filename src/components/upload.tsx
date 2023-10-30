@@ -33,6 +33,7 @@ const Upload = ({tech}: IProps) => {
         <div className="my-2 w-[800px] p-4 border shadow mx-auto">
             <div>
                 <button className="btn" disabled={loading} onClick={() => openFilePicker()}> Upload File</button>
+                {loading && <span className="loading loading-spinner loading-lg"></span>}
             </div>
             {tech == Tech.Helia && <UploadHelia files={plainFiles} setCID={setLink}/>}
             <div>{<div>{link}</div>}</div>

@@ -13,7 +13,7 @@ export const useWebTorrent = () => {
         torrent.on('download', (bytes:any) => {
             console.log(torrent)
             console.log(torrent.length +" / "+torrent.downloaded)
-            setTorrent(torrent)
+            setTorrent({progress: Math.floor(torrent.progress *100), lenght: torrent.length, downloaded: torrent.downloaded})
         })        
     }    
 
