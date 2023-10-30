@@ -7,6 +7,13 @@ import { IProps, Tech } from "../lib/types";
 
 const DEFAULT_OBJECT = '{"hello": "world"}'
 
+function toHexString(byteArray: Uint8Array) {
+    return Array.from(byteArray, function(byte) {
+      return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    }).join('')
+}
+
+
 const Upload = ({tech}: IProps) => {
     const { openFilePicker, filesContent, loading, plainFiles } = useFilePicker({readAs: "BinaryString",});
     const [link, setLink] = useState<string>()
@@ -22,7 +29,8 @@ const Upload = ({tech}: IProps) => {
                     console.log(f)
                     seed(f, (torrent) => {
                         console.log(torrent)
-                        setLink(torrent.magnetURI)
+                        console.log(torrent.torrentFile)
+                        setLink(toHexString(torrent.torrentFile))
                     })
                 }
             }

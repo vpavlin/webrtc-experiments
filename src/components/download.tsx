@@ -4,6 +4,15 @@ import { CID } from 'multiformats/cid'
 import { useWebTorrent } from "../hooks/useWebTorrent";
 import { IProps, Tech } from "../lib/types";
 
+const hexToBytes = (hex: string) => {
+    var bytes = [];
+
+    for (var c = 0; c < hex.length; c += 2) {
+        bytes.push(parseInt(hex.substr(c, 2), 16));
+    }
+
+    return new Uint8Array(bytes);
+};
 
 const Download = ({tech}: IProps) => {
     const [link, setLink] = useState<string>()
@@ -61,7 +70,7 @@ const DownloadWebTorrent = ({magnetUri}: IWebTorrentProps) => {
 
     const downloadLocal = async () => {  
         setDownloading(true) 
-        download(magnetUri!, async (torrent: any) => {
+        download(hexToBytes(magnetUri!), async (torrent: any) => {
             console.log(torrent.files[0])
             // Torrents can contain many files. Let's use the .mp4 file
             const files:File[] = torrent.files

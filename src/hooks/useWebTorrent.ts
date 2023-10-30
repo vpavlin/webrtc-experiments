@@ -7,7 +7,7 @@ export const useWebTorrent = () => {
     const client = new WebTorrent()
     const [torrent, setTorrent] = useState<any>()
 
-    const download = (magnetUri: string, cb: (torrent: any) => void) => {
+    const download = (magnetUri: string | Uint8Array, cb: (torrent: any) => void) => {
         console.log(magnetUri)
         const torrent = client.add(magnetUri, cb)
         torrent.on('download', (bytes:any) => {
