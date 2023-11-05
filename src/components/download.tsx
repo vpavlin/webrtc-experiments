@@ -20,7 +20,7 @@ const Download = ({tech}: IProps) => {
     return (
         <div className="my-2 w-[800px] p-4 border shadow mx-auto">
             <div>Paste content link</div>
-            <input className="input input-bordered" size={45} onChange={(e) => setLink(e.target.value)} />
+            <textarea className="textarea textarea-bordered w-full break-words min-h-[300px]"  onChange={(e) => setLink(e.target.value)} />
 
             {tech == Tech.Helia && <DownloadHelia cid={link}  />}
             {tech == Tech.WebTorrent && <DownloadWebTorrent magnetUri={link} />}
@@ -74,6 +74,7 @@ const DownloadWebTorrent = ({magnetUri}: IWebTorrentProps) => {
             console.log(torrent.files[0])
             // Torrents can contain many files. Let's use the .mp4 file
             const files:File[] = torrent.files
+            console.log(files)
             const b = await files[0].arrayBuffer()
             setBlobUrl(URL.createObjectURL(new Blob([b], { type: files[0].type } /* (1) */)))
             const bloburl = URL.createObjectURL(new Blob([b], { type: files[0].type }))
